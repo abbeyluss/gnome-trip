@@ -11,7 +11,7 @@ import Setup from './frontend/setup';
 function App() {
 
   return (
-    <Welcome/>
+    <Setup/>
   )
 }
 

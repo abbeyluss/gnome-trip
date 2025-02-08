@@ -24,11 +24,11 @@ const Vibes = ({
 </select>
             </div>
             <div className='modal-label'>
-            <button className='button-style' onClick={handleNextStep}>
-                Generate Playlist
-            </button>
             <button className='button-style' onClick={handlePreviousStep}>
                 Reset Trip
+            </button>
+            <button className='button-style' onClick={handleNextStep}>
+                Generate Playlist
             </button>
             </div>
             </div>

@@ -31,7 +31,7 @@ const PlaylistDuration = ({
   onChange={handleChange}
   valueLabelDisplay="auto"
   min={1}
-  max={6}
+  max={30}
 />
              </div>
              <div className='modal-label'>

@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import JourneyLocation from "./JourneyLocation";
 import Vibes from "./Vibes";
+import PlaylistDuration from "./playlistDuration";
 
 const Setup = () => {
     //moving from step to step
@@ -33,14 +34,22 @@ const Setup = () => {
         handleNextStep={handleNextStep} />
       )}
       {step === 2 && (
-        <Vibes
+        <PlaylistDuration
+        startText={startText}
+        destText={destText}
+        playlistMin={playlistMin}
+        playlistMax={playlistMax}
+        setPlaylistMin={setPlaylistMin}
+        setPlaylistMax={setPlaylistMax}
+        handleNextStep={handleNextStep}
+        handlePreviousStep={handlePreviousStep} />
+      )} {step === 3 && (        <Vibes
         startText={startText}
         destText={destText}
         vibesText={vibesText}
         setVibesText={setVibesText}
         handleNextStep={handleNextStep}
-        handlePreviousStep={handlePreviousStep} />
-      )}
+        handlePreviousStep={handlePreviousStep} />)}
         </div>
     );
 };
