@@ -1,0 +1,47 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25); /* Transparent dark background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  .modal-content {
+    font-family: Flower;
+    background-color: rgb(234, 234, 234);
+    padding: 30px;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    width: 90%; /* Ensure it fits on small screens */
+    position: relative;
+  }
+  .modal-label {
+    padding: 5px;
+    display: flex;
+    font-family: Flower;
+  }
+  /* Centered Content for Step 4 */
+  .centered-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    font-family: Flower;
+  }
+
+  .button-style {
+    font-family: Flower;
+    background-color: #4058A2;
+    color: white;
+    padding-top: 10px;
+  }
+  

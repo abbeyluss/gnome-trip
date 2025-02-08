@@ -1,0 +1,9 @@
+.background-image {
+    background-image: url('https://media.istockphoto.com/id/827250930/vector/mountain-forest-meadow-landscape.jpg?s=612x612&w=0&k=20&c=WgX2mtTJWSrEvmYVSElIdUdGbdqA5VmJf38Yyz-RlPE=');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    height: 100vh; 
+    width: 100vw; 
+  }
