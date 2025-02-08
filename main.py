@@ -31,7 +31,7 @@ sp_oauth = SpotifyOAuth(
     show_dialog=True    # optional 
 )
 
-sp = Spotify(auth_manager=sp_oauth)
+sp = Spotify(auth_manager=sp_oauth) # spotify client, call methods on this to get data
 
 
 # endpoints
@@ -49,7 +49,25 @@ def callback():
     sp_oauth.get_access_token(request.args['code'])
     return(url_for('get_playlists'))
 
+
+@app.route('/get_playlist')
+def get_playlists():
+    if not sp_oauth.validate_token(cache_handler.get_cached_token()): # code duplication! abstract this if statement into its own method 
+        auth_url = sp_oauth.get_authorize_url()
+        return redirect(auth_url)
+    
+    playlists = sp.current_user_playlists()
+    playlists_info = [(pl['name'], pl['external_urls']['spotify']) for pl in playlists['items']]
+    playlists_html = '<br>'.join([f'{name}: {url}' for name, url in playlists_info])
+
+    return playlists_html
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('home'))
+
+
 if __name__ == '__main__':
     app.run(debug=True)
-
 
