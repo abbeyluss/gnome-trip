@@ -14,6 +14,8 @@ redirect_uri= 'http://localhost:5001/callback'
 scope = 'playlist-read-private, user-read-recently-played, playlist-modify-private' # search for scopes page in API documentation and modify as needed
 cache_handler = FlaskSessionCacheHandler(session)
 
+global sp
+sp = 0
 def authenticate():
     sp_oauth = SpotifyOAuth( # use this variable for authorizations and tokens 
     client_id=client_id,

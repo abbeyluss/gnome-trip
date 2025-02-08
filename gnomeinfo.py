@@ -8,7 +8,8 @@ from spotipy import Spotify
 from spotipy.oauth2 import SpotifyOAuth
 from spotipy.cache_handler import FlaskSessionCacheHandler
 
-from main import sp
+from auth import sp
 
 def gnomeFunc():
+    print(sp)
     print(sp.current_user_playlists())
