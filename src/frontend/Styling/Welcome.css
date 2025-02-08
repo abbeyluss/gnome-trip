@@ -15,3 +15,17 @@
     flex-direction: column;
     align-items: center;
   }
+
+  .button {
+    padding: 12px 36px; /* Increased padding for larger click area */
+    font-size: 18px;
+    font-weight: bold; /* Emphasize button text */
+    background-color: #003a5d;
+    color: #fff;
+    border: none;
+    border-radius: 8px; /* Slightly rounder corners */
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }

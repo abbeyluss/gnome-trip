@@ -11,8 +11,7 @@ const Setup = () => {
     const [startText, setStartText] = useState('');
     const [destText, setDestText] = useState('');
     const [vibesText, setVibesText] = useState('');
-    const [playlistMin, setPlaylistMin] = useState(1);
-    const [playlistMax, setPlaylistMax] = useState(5);
+    const [playlistDur, setPlaylistDur] = useState(1);
 
     //move forward when the next button is selected
     const handleNextStep = () => {
@@ -37,10 +36,8 @@ const Setup = () => {
         <PlaylistDuration
         startText={startText}
         destText={destText}
-        playlistMin={playlistMin}
-        playlistMax={playlistMax}
-        setPlaylistMin={setPlaylistMin}
-        setPlaylistMax={setPlaylistMax}
+        playlistDur={playlistDur}
+        setPlaylistDur={setPlaylistDur}
         handleNextStep={handleNextStep}
         handlePreviousStep={handlePreviousStep} />
       )} {step === 3 && (        <Vibes
