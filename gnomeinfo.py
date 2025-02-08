@@ -10,5 +10,5 @@ from spotipy.cache_handler import FlaskSessionCacheHandler
 
 from main import sp
 
-
-print(sp.current_user_playlists());
+def gnomeFunc():
+    print(sp.current_user_playlists())
