@@ -16,8 +16,8 @@ app.config['SECRET_KEY'] = os.urandom(64)
 
 
 client_id='bcbf028279894f78b9502f436ebf01d7'
-client_secret='f8cbebfebfea44b2badb2178c7977376'
-redirect_uri= 'http://localhost:5000/callback'
+client_secret='0a25b41c4f384887be1f8822a55305f8'
+redirect_uri= 'http://localhost:5001/callback'
 scope = 'playlist-read-private, user-read-recently-played, playlist-modify-private' # search for scopes page in API documentation and modify as needed
 
 cache_handler = FlaskSessionCacheHandler(session)
@@ -41,13 +41,17 @@ sp = Spotify(auth_manager=sp_oauth) # spotify client, call methods on this to ge
 def home():
     if not sp_oauth.validate_token(cache_handler.get_cached_token()): # check if user is autheticated, if not redirect to spotify login
         auth_url = sp_oauth.get_authorize_url()
-        return redirect(auth_url)
+        print(auth_url)
+        return redirect(auth_url)   
     return redirect(url_for('get_playlists')) # name of the method should go in the (), 'get_playlists' will need to be changed 
 
 # callback endpoint: after authetication, get access token & redirect back to Gnome Trips 
 @app.route('/callback')
 def callback():
-    sp_oauth.get_access_token(request.args['code'])
+    token_info = sp_oauth.get_access_token(request.args['code'])
+    print('Am I HERE')
+    print(token_info)
+    session['token_info'] = token_info
     return redirect(url_for('get_playlists'))
 
 # get_playlists endpoint: validate token, fetch & print a user's playlists (this function is just an example and should be changed to fit our project)
@@ -71,5 +75,5 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5001)
 
