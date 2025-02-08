@@ -22,7 +22,7 @@ scope = 'playlist-read-private, user-read-recently-played, playlist-modify-priva
 
 cache_handler = FlaskSessionCacheHandler(session)
 
-sp_oauth = SpotifyOAuth(
+sp_oauth = SpotifyOAuth( # use this variable for authorizations and tokens 
     client_id=client_id,
     client_secret=client_secret,
     redirect_uri=redirect_uri,
@@ -31,7 +31,7 @@ sp_oauth = SpotifyOAuth(
     show_dialog=True    # optional 
 )
 
-sp = Spotify(auth_manager=sp_oauth) # spotify client, call methods on this to get data
+sp = Spotify(auth_manager=sp_oauth) # spotify client, use to call functions on Spotify API (call sp_oauth for authorization validation)
 
 
 # endpoints
