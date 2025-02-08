@@ -31,6 +31,7 @@ sp_oauth = SpotifyOAuth( # use this variable for authorizations and tokens
     show_dialog=True    # optional 
 )
 
+global sp
 sp = Spotify(auth_manager=sp_oauth) # spotify client, use to call functions on Spotify API (call sp_oauth for authorization validation)
 
 
