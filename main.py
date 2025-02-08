@@ -36,20 +36,21 @@ sp = Spotify(auth_manager=sp_oauth) # spotify client, call methods on this to ge
 
 # endpoints
 
-@app.route('/')
+# home endpoint: initial check for authetication
+@app.route('/')  
 def home():
-    if not sp_oauth.validate_token(cache_handler.get_cached_token()):
+    if not sp_oauth.validate_token(cache_handler.get_cached_token()): # check if user is autheticated, if not redirect to spotify login
         auth_url = sp_oauth.get_authorize_url()
         return redirect(auth_url)
-    return(url_for('get_playlists')) # name of the method should go in the (), 'get_playlists' will need to be changed 
+    return redirect(url_for('get_playlists')) # name of the method should go in the (), 'get_playlists' will need to be changed 
 
-
+# callback endpoint: after authetication, get access token & redirect back to Gnome Trips 
 @app.route('/callback')
 def callback():
     sp_oauth.get_access_token(request.args['code'])
-    return(url_for('get_playlists'))
+    return redirect(url_for('get_playlists'))
 
-
+# get_playlists endpoint: validate token, fetch & print a user's playlists (this function is just an example and should be changed to fit our project)
 @app.route('/get_playlist')
 def get_playlists():
     if not sp_oauth.validate_token(cache_handler.get_cached_token()): # code duplication! abstract this if statement into its own method 
