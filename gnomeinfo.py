@@ -8,7 +8,7 @@ from spotipy import Spotify
 from spotipy.oauth2 import SpotifyOAuth
 from spotipy.cache_handler import FlaskSessionCacheHandler
 
-from auth import sp
+from main import sp
 
 def gnomeFunc():
     print(sp)
