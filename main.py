@@ -2,7 +2,7 @@ import os
 
 from dotenv import load_dotenv, dotenv_values
 
-from flask import Flask, session
+from flask import Flask, redirect, session, url_for, request
 
 from spotipy import Spotify
 from spotipy.oauth2 import SpotifyOAuth
@@ -33,6 +33,21 @@ sp_oauth = SpotifyOAuth(
 
 sp = Spotify(auth_manager=sp_oauth)
 
+
+# endpoints
+
+@app.route('/')
+def home():
+    if not sp_oauth.validate_token(cache_handler.get_cached_token()):
+        auth_url = sp_oauth.get_authorize_url()
+        return redirect(auth_url)
+    return(url_for('get_playlists')) # name of the method should go in the (), 'get_playlists' will need to be changed 
+
+
+@app.route('/callback')
+def callback():
+    sp_oauth.get_access_token(request.args['code'])
+    return(url_for('get_playlists'))
 
 if __name__ == '__main__':
     app.run(debug=True)
