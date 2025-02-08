@@ -28,4 +28,3 @@ def authenticate():
     sp = Spotify(auth_manager=sp_oauth) # spotify client, use to call functions on Spotify API (calls sp_oauth for authorization validation)
     return sp, sp_oauth
 
-
