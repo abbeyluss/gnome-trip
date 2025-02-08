@@ -37,3 +37,4 @@ const Vibes = ({
         </>
     )
 }
+export default Vibes;
