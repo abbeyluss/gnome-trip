@@ -63,7 +63,8 @@ def get_playlists():
 
     return playlists_html
 
-@app.route('/logout')
+# logout endpoint: clear the session and redirect the user to the home page 
+@app.route('/logout') 
 def logout():
     session.clear()
     return redirect(url_for('home'))
