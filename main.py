@@ -8,13 +8,15 @@ from spotipy import Spotify
 from spotipy.oauth2 import SpotifyOAuth
 from spotipy.cache_handler import FlaskSessionCacheHandler
 
-from auth import sp, sp_oauth, cache_handler
+from auth import authenticate,cache_handler
 from gnomeinfo import *
 
 load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(64)
+
+sp, sp_oauth = authenticate()
 
 # home endpoint: initial check for authetication
 @app.route('/')  
