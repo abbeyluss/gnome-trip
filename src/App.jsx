@@ -1,18 +1,21 @@
-import './App.css'
+import './App.css';
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import './fonts/IndieFlower-Regular.ttf'
-import JourneyLocation from './frontend/JourneyLocation';
+import './fonts/IndieFlower-Regular.ttf';
 import Welcome from './frontend/Welcome';
-import Vibes from './frontend/Vibes';
-import PlaylistDuration from './frontend/playlistDuration';
 import Setup from './frontend/setup';
+import Display from './frontend/DisplayScreen';
 
 function App() {
-
   return (
-    <Setup/>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Welcome />} />
+        <Route path="/setup" element={<Setup />} />
+        <Route path="/display" element={<Display/>} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import './Styling/Modal.css';
 import './Styling/Welcome.css';
 
@@ -7,7 +8,6 @@ const Vibes = ({
    destText,
    vibesText,
    setVibesText,
-   handleNextStep,
    handlePreviousStep, 
 }) => {
 
@@ -27,9 +27,9 @@ const Vibes = ({
             <button className='button-style' onClick={handlePreviousStep}>
                 Reset Trip
             </button>
-            <button className='button-style' onClick={handleNextStep}>
-                Generate Playlist
-            </button>
+            <NavLink to="/display" className="button">
+            Generate Playlist
+        </NavLink>
             </div>
             </div>
             </div>
