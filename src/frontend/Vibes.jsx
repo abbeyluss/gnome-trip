@@ -21,16 +21,15 @@ const Vibes = ({
                 <select className = 'spinner' value={vibesText} onChange={(e) => setVibesText(e.target.value)}>
   <option value='Mellow'>Mellow</option>
   <option value='DanceParty'>Dance Party</option>
-  <option value='Sunshine'>Sunshine</option>
   <option value='Cozy'>Cozy</option>
 </select>
             </div>
-            <div className='modal-label'>
+            <div className='modal-buttons'>
             <button className='button-style' onClick={handlePreviousStep}>
-                Reset Trip
+                Back
             </button>
             <button className='button-style' onClick={handleNextStep}>
-                Generate Playlist
+                Next
             </button>
             </div>
             </div>

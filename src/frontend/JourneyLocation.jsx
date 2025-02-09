@@ -39,7 +39,7 @@ const JourneyLocation = ({
                     </div>
                     <div className='modal-label'>
                         <button className='button-style' onClick={handleNextStep}>
-                            Start Journey
+                            Next
                         </button>
                     </div>
                 </div>
