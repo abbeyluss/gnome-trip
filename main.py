@@ -60,7 +60,7 @@ def get_recs():
 
     # get values for top albums from top 50 artists 
     for artist in top_artists['items']:
-        albums = sp.artist_albums(artist['id'], album_type='album', limit=50)
+        albums = sp.artist_albums(artist['id'], album_type='album', limit=1)
         all_albums.extend(albums['items'])
 
     all_songs = []
@@ -80,12 +80,24 @@ def get_recs():
         all_songs.pop(x)
         count += 1
     
+    user = sp.current_user()
+    user_id = user['id']
+    print(user_id)
+    uri_list = []
+    sp.user_playlist_create(user_id, "Gnome Trip Playlist!", public=True, collaborative=False, description='A playlist for your travels')
+    for song in bella_list:
+        uri_list.append(song['uri'])
+    print(uri_list)
+    playlist = sp.playlist_add_items(user_id, uri_list, position=None)
+    playlist_url = playlist['spotify']
+    print(playlist_url)
+    
 
-    song_names = [(a['name']) for a in bella_list]
-    print(song_names)
-    songs_html  = [f'{name}' for name in song_names]
+    # song_names = [(a['name']) for a in bella_list]
+    # print(song_names)
+    # songs_html  = [f'{name}' for name in song_names]
 
-    return songs_html
+    # return songs_html
 
     # song_details = [
     #     f"{song['name']} - {', '.join(artist['name'] for artist in song['artists'])}"
