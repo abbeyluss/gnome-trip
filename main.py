@@ -1,4 +1,5 @@
 import os
+import random
 
 from dotenv import load_dotenv, dotenv_values
 
@@ -55,29 +56,39 @@ def get_recs():
         auth_url = sp_oauth.get_authorize_url()
         return redirect(auth_url)
     
-    # get values (& seed values) for top artists and tracks
-    top_artists = sp.current_user_top_artists(limit=1, time_range='short_term')
-    # top_tracks = sp.current_user_top_tracks(limit=2, time_range='short_term')
-    seed_artist_ids = [artist['id'] for artist in top_artists['items']]
-    print(top_artists)
-    print(seed_artist_ids)
-    # seed_track_ids = [track['id'] for track in top_tracks['items']]
-    recommendations=sp.recommendations(
-        seed_artists=seed_artist_ids, 
-        # seed_tracks=seed_track_ids, # add code for target dancability, energy, etc. 
-        limit=10 # change this later 
-    )
-      # Build a list of tuples (track name, artist names) for each recommended track
-    recommendations_info = [
-        (track['name'], ", ".join(artist['name'] for artist in track['artists']))
-        for track in recommendations['tracks']
-    ]
+    # get top 50 artists
+    top_artists = sp.current_user_top_artists(limit=50, time_range='short_term')  
+
+    all_albums = []
+
+    # get values for top albums from top 50 artists 
+    for artist in top_artists['items']:
+        albums = sp.artist_albums(artist['id'], album_type='album', limit=50)
+        all_albums.extend(albums['items'])
+
+    all_songs = []
+
+    # get all songs from all albums
+    for album in all_albums:
+        songs = sp.album_tracks(album['id'])
+        all_songs.extend(songs['items'])
+
+    # randomly pick songs
+    playlist = []
+
+    count = 0
+    while count <= 20:
+        x = random.randint(0, (len(all_songs) - 1))
+        playlist.append(all_songs[x])
+        all_songs.pop(x)
+        count += 1
     
-    
-    # Convert the list into an HTML string with each track on a new line
-    recommendations_html = '<br>'.join([f'{name}: {artists}' for name, artists in recommendations_info])
-    
-    return recommendations_html
+
+    song_names = [(a['name']) for a in playlist]
+    print(song_names)
+    songs_html  = [f'{name}' for name in song_names]
+
+    return songs_html
 
 
 
