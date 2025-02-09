@@ -1,0 +1,5 @@
+@font-face {
+  font-family: "Flower"; 
+  src: local("IndieFlower-Regular"),
+    url("./fonts/IndieFlower-Regular.ttf") format("truetype");
+}
