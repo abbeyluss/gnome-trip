@@ -60,7 +60,7 @@ def get_recs():
 
     # get values for top albums from top 50 artists 
     for artist in top_artists['items']:
-        albums = sp.artist_albums(artist['id'], album_type='album', limit=1)
+        albums = sp.artist_albums(artist['id'], album_type='album', limit=3)
         all_albums.extend(albums['items'])
 
     all_songs = []
@@ -74,7 +74,7 @@ def get_recs():
     bella_list = []
 
     count = 0
-    while count <= 30:
+    while count < 30:
         x = random.randint(0, (len(all_songs) - 1))
         bella_list.append(all_songs[x])
         all_songs.pop(x)
@@ -84,13 +84,24 @@ def get_recs():
     user_id = user['id']
     print(user_id)
     uri_list = []
-    sp.user_playlist_create(user_id, "Gnome Trip Playlist!", public=True, collaborative=False, description='A playlist for your travels')
+    playlist_creator = sp.user_playlist_create(user_id, "Gnome Trip Playlist!", public=True, collaborative=False, description='A playlist for your travels')
+    playlist_id = playlist_creator['id']
+    print(playlist_id)
     for song in bella_list:
         uri_list.append(song['uri'])
     print(uri_list)
-    playlist = sp.playlist_add_items(user_id, uri_list, position=None)
-    playlist_url = playlist['spotify']
-    print(playlist_url)
+    sp.playlist_add_items(playlist_id, uri_list, position=None)
+    #url = sp.playlist_items(playlist_id, fields='d')
+    url = sp.playlist(playlist_id, fields='external_urls', market=None, additional_types=('track',))
+    #url = url['spotify']
+    #playlist_url = playlist['external_urls']
+    #playlist_url = playlist_url['spotify']
+    #playlist_desc = playlist['description']
+    print(url)
+    #url_html = {url}
+    
+    #return url_html
+    return "hi"
     
 
     # song_names = [(a['name']) for a in bella_list]
