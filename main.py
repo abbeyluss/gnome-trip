@@ -3,21 +3,28 @@ import random
 
 from dotenv import load_dotenv, dotenv_values
 
-from flask import Flask, redirect, session, url_for, request
+from flask import Flask, redirect, session, url_for, request, jsonify
+from flask_cors import CORS
 
 from spotipy import Spotify
 from spotipy.oauth2 import SpotifyOAuth
 from spotipy.cache_handler import FlaskSessionCacheHandler
 
-from auth import authenticate,cache_handler
+from auth import authenticate,cache_handler, client_secret, client_id, redirect_uri
+import requests
+import base64
 
 
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)  # Allow cross-origin requests
 app.config['SECRET_KEY'] = os.urandom(64)
 
 sp, sp_oauth = authenticate()
+
+SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
+FRONTEND_URL = "http://localhost:5173/setup"
 
 # home endpoint: initial check for authetication
 @app.route('/')  
@@ -30,8 +37,25 @@ def home():
 # callback endpoint: after authetication, get access token & redirect back to Gnome Trips 
 @app.route('/callback')
 def callback():
+    #Handle Spotify callback and exchange code for an access token
+    code = request.args.get("code")
+    if not code:
+        return jsonify({"error": "Authorization code missing"}), 400
+    
     token_info = sp_oauth.get_access_token(request.args['code'])
     session['token_info'] = token_info
+    #return redirect(url_for('get_recs'))
+
+    token_response = requests.post(
+        SPOTIFY_TOKEN_URL,
+        headers={
+            "Authorization": "Basic " + base64.b64encode(f"{client_id}:{client_secret}".encode()).decode(),
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        data={"grant_type": "authorization_code", "code": code, "redirect_uri": redirect_uri},
+    )
+
+    token_data = token_response.json()
     return redirect(url_for('get_recs'))
 
 @app.route('/get_recs')
@@ -85,7 +109,10 @@ def get_recs():
     url = sp.playlist(playlist_id, fields='external_urls', market=None, additional_types=('track',))
     url = url['external_urls']['spotify']
     print(url)
-    return url
+
+
+    #return url
+    return redirect(f"{FRONTEND_URL}?playlistUrl={url}")
     
 
 

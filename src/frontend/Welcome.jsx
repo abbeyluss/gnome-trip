@@ -17,6 +17,10 @@ export default function Welcome() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const handleSpotifyLogin = async () => {
+      window.location.href = "http://localhost:5001/";
+    };
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % backgrounds.length);
@@ -53,9 +57,9 @@ export default function Welcome() {
         </div>
 
         <h2>Start Your Journey Today!</h2>
-        <NavLink to="/setup" className="button">
+        <button onClick={handleSpotifyLogin}>
           Log in With Spotify
-        </NavLink>
+        </button>
       </div>
     </div>
   );
