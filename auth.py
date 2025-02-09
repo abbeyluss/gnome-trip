@@ -11,7 +11,7 @@ from spotipy.cache_handler import FlaskSessionCacheHandler
 client_id='bcbf028279894f78b9502f436ebf01d7'
 client_secret='0a25b41c4f384887be1f8822a55305f8'
 redirect_uri= 'http://localhost:5001/callback'
-scope = 'playlist-read-private, user-read-recently-played, playlist-modify-private' # search for scopes page in API documentation and modify as needed
+scope = 'user-top-read' # search for scopes page in API documentation and modify as needed
 cache_handler = FlaskSessionCacheHandler(session)
 
 global sp
