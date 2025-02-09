@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import './Styling/Modal.css';
 import './Styling/Welcome.css';
 
@@ -9,27 +8,30 @@ const Vibes = ({
    vibesText,
    setVibesText,
    handlePreviousStep, 
+   handleNextStep,
 }) => {
 
     return ( <>
     <div className='background-image'>
+    <img src="/gnometrip.png" width={250} height={300} alt="Logo"/>
         <div className='modal-overlay'>
             <div className='modal-content'>
            <h3>What is the vibe of your journey from {startText} to {destText}</h3>
            <div className='modal-label'>
-                <select value={vibesText} onChange={(e) => setVibesText(e.target.value)}>
-  <option value="Melancholy">Melancholy</option>
-  <option value="DanceParty">Dance Party</option>
-  <option value="Rage">Rage</option>
+                <select className = 'spinner' value={vibesText} onChange={(e) => setVibesText(e.target.value)}>
+  <option value='Mellow'>Mellow</option>
+  <option value='DanceParty'>Dance Party</option>
+  <option value='Sunshine'>Sunshine</option>
+  <option value='Cozy'>Cozy</option>
 </select>
             </div>
             <div className='modal-label'>
             <button className='button-style' onClick={handlePreviousStep}>
                 Reset Trip
             </button>
-            <NavLink to="/display" className="button">
-            Generate Playlist
-        </NavLink>
+            <button className='button-style' onClick={handleNextStep}>
+                Generate Playlist
+            </button>
             </div>
             </div>
             </div>

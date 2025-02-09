@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import JourneyLocation from "./JourneyLocation";
 import Vibes from "./Vibes";
 import PlaylistDuration from "./playlistDuration";
+import VibeImage from "./DisplayScreen";
 
 const Setup = () => {
     //moving from step to step
@@ -10,7 +11,7 @@ const Setup = () => {
     //state variables for individual steps of generation process
     const [startText, setStartText] = useState('');
     const [destText, setDestText] = useState('');
-    const [vibesText, setVibesText] = useState('');
+    const [vibesText, setVibesText] = useState('Melancholy');
     const [playlistDur, setPlaylistDur] = useState(1);
 
     //move forward when the next button is selected
@@ -21,6 +22,7 @@ const Setup = () => {
       //move back to previos step when arrow is clicked
     const handlePreviousStep = () => {
         setStep(step - 1);
+        console.log("Current step:", step);
       };
     return (
         <div>
@@ -47,6 +49,8 @@ const Setup = () => {
         setVibesText={setVibesText}
         handleNextStep={handleNextStep}
         handlePreviousStep={handlePreviousStep} />)}
+        {step === 4 && (        <VibeImage
+        vibesText={vibesText} />)}
         </div>
     );
 };
