@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Styling/Modal.css';
 import './Styling/Welcome.css';
+import cozyBg from './images/cozybg.png';
 
 const PlaylistDuration = ({
     startText,
@@ -11,7 +12,7 @@ const PlaylistDuration = ({
     handlePreviousStep, 
  }) => {
      return ( <>
-     <div className='background-image'>
+     <div className='background-image' style={{ backgroundImage: `url(${cozyBg})` }}>
      <img src="/gnometrip.png" width={250} height={300} alt="Logo"/>
          <div className='modal-overlay'>
              <div className='modal-content'>

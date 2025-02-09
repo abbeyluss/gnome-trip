@@ -1,5 +1,5 @@
 .background-image {
-    background-image: url('/Users/emmaklekotka/Documents/GitHub/gnome-trip/src/frontend/images/cozybg.png');
+    background-image: url('/frontend/images/cozybg.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -19,7 +19,7 @@
     padding: 12px 36px; /* Increased padding for larger click area */
     font-size: 18px;
     font-weight: bold; /* Emphasize button text */
-    background-color: #003a5d;
+    background-color: #4058A2;
     color: #fff;
     border: none;
     border-radius: 8px; /* Slightly rounder corners */
@@ -33,6 +33,19 @@
     transition: s ease-in-out;
     animation: shake 3s;
   animation-iteration-count: infinite;
+  }
+
+  .header{
+    font-family: Flower;
+    font-size: 30px;
+    color: white;
+  }
+
+  .button{
+    font-family: Flower;
+    font-size: 30px;
+    color: white;
+    background-color: #4058A2;
   }
 
   @keyframes shake {

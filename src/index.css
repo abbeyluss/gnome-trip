@@ -66,3 +66,9 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+@font-face {
+  font-family: "Flower"; 
+  src: local("IndieFlower-Regular"),
+    url("./fonts/IndieFlower-Regular.ttf") format("truetype");
+}

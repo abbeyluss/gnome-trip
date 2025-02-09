@@ -44,8 +44,8 @@ export default function Welcome() {
       }}
     >
       <div className="text-center">
-        <img src="/gnometrip.png" width={250} height={300} alt="Logo" />
-
+         <img src="/gnometrip.png" width={250} height={300} alt="Logo" />
+        </div>
         <div className="gnome-container">
           <img
             src={gnomes[currentIndex]} 
@@ -55,12 +55,9 @@ export default function Welcome() {
             className="gnome-image"
           />
         </div>
-
-        <h2>Start Your Journey Today!</h2>
-        <button onClick={handleSpotifyLogin}>
+        <button className="button" onClick={handleSpotifyLogin}>
           Log in With Spotify
         </button>
       </div>
-    </div>
   );
 }

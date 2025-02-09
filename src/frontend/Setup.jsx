@@ -5,6 +5,8 @@ import PlaylistDuration from "./PlaylistDuration";
 import VibeImage from "./DisplayScreen";
 import { useLocation } from "react-router-dom";
 import { Spotify } from "react-spotify-embed";
+import "./Styling/Display.css"
+
 
 const Setup = () => {
 //incriment step
@@ -67,10 +69,10 @@ const Setup = () => {
         />
       )}
       {step === 4 && (
-        <div>
-          <VibeImage vibesText={vibesText} />
-<Spotify link={playlistUrl}/>
-        </div>
+    <div className="display-container">
+    <VibeImage className="gnome" vibesText={vibesText} />
+    <Spotify className="spotify-embed" link={playlistUrl}/>
+  </div>
       )}
     </div>
   );

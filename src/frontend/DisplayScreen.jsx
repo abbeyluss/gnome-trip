@@ -8,7 +8,9 @@ import "./Styling/Display.css"
  import dancePartybg from "./images/dancepartybg.png";
  import cozybg from "./images/cozybg.png";
 
-const VibeImage = ({ vibesText }) => {
+const VibeImage = (
+  { vibesText },
+{destText}) => {
   const vibeGnome = {
     Mellow: mellowImg,
     DanceParty: dancePartyImg,
@@ -30,6 +32,7 @@ const VibeImage = ({ vibesText }) => {
     }}
   >
          <img src="/gnometrip.png" width={250} height={300} alt="Logo"/>
+         <h1 className="headerText">Here some tunes for your trip to {destText}!</h1>
         <div className='gnome'>
       <img src={vibeGnome[vibesText]} alt={vibesText} width="500" height="500" />
     </div>
