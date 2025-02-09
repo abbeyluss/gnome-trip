@@ -24,7 +24,6 @@ sp, sp_oauth = authenticate()
 def home():
     if not sp_oauth.validate_token(cache_handler.get_cached_token()): # check if user is autheticated, if not redirect to spotify login
         auth_url = sp_oauth.get_authorize_url()
-        print(auth_url)
         return redirect(auth_url)   
     return redirect(url_for('get_recs')) # name of the method should go in the (), 'get_playlists' will need to be changed 
 
@@ -32,8 +31,6 @@ def home():
 @app.route('/callback')
 def callback():
     token_info = sp_oauth.get_access_token(request.args['code'])
-    print('Am I HERE')
-    print(token_info)
     session['token_info'] = token_info
     return redirect(url_for('get_recs'))
 
@@ -84,40 +81,36 @@ def get_recs():
         count += 1
     
 
-    # song_names = [(a['name']) for a in playlist]
-    # print(song_names)
-    # songs_html  = [f'{name}' for name in song_names]
-
-    # return songs_html
-
-    song_details = [
-        f"{song['name']} - {', '.join(artist['name'] for artist in song['artists'])}"
-        for song in bella_list
-    ]
-
-    print(song_details)
-
-    user = sp.current_user()
-    user_id = user['id']
-    print(user_id)
-    uri_list = []
-    sp.user_playlist_create(user_id, "Gnome Trip Playlist!", public=True, collaborative=False, description='A playlist for your travels')
-    for song in bella_list:
-        uri_list.append(str(song['uri']))
-    for item in uri_list:
-        item.replace("spotify:track:", "")
-    print(uri_list)
-    playlist = sp.playlist_add_items(user_id, uri_list, position=None)
-    playlist_url = playlist['spotify']
-    print(playlist_url)
-
-
-# If you need the details formatted as HTML or some other string,
-# you can simply assign it or further process it.
-    songs_html = [f'{detail}' for detail in song_details]
+    song_names = [(a['name']) for a in bella_list]
+    print(song_names)
+    songs_html  = [f'{name}' for name in song_names]
 
     return songs_html
 
+    # song_details = [
+    #     f"{song['name']} - {', '.join(artist['name'] for artist in song['artists'])}"
+    #     for song in bella_list
+    # ]
+
+    # print(song_details)
+
+    # user = sp.current_user()
+    # user_id = user['id']
+    # print(user_id)
+    # uri_list = []
+    # sp.user_playlist_create(user_id, "Gnome Trip Playlist!", public=True, collaborative=False, description='A playlist for your travels')
+    # for song in bella_list:
+    #     uri_list.append(str(song['uri']))
+    # for item in uri_list:
+    #     item.replace("spotify:track:", "")
+    # print(uri_list)
+    # playlist = sp.playlist_add_items(user_id, uri_list, position=None)
+    # playlist_url = playlist['spotify']
+    # print(playlist_url)
+
+    # songs_html = [f'{detail}' for detail in song_details]
+
+    # return songs_html
 
 
 

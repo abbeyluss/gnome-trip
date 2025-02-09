@@ -8,8 +8,8 @@ from spotipy import Spotify
 from spotipy.oauth2 import SpotifyOAuth
 from spotipy.cache_handler import FlaskSessionCacheHandler
 
-client_id='bcbf028279894f78b9502f436ebf01d7'
-client_secret='0a25b41c4f384887be1f8822a55305f8'
+client_id='adf9b96f39074f1882c250e21cd6a830'
+client_secret='14d6973203664d3f9259b6017341f08d'
 redirect_uri= 'http://localhost:5001/callback'
 scope = 'user-top-read, playlist-modify-public' # search for scopes page in API documentation and modify as needed
 cache_handler = FlaskSessionCacheHandler(session)
