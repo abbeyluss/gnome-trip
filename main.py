@@ -10,7 +10,7 @@ from spotipy.oauth2 import SpotifyOAuth
 from spotipy.cache_handler import FlaskSessionCacheHandler
 
 from auth import authenticate,cache_handler
-from gnomeinfo import *
+
 
 load_dotenv()
 
@@ -33,19 +33,6 @@ def callback():
     token_info = sp_oauth.get_access_token(request.args['code'])
     session['token_info'] = token_info
     return redirect(url_for('get_recs'))
-
-# get_playlists endpoint: validate token, fetch & print a user's playlists (this function is just an example and should be changed to fit our project)
-# @app.route('/get_playlist')
-# def get_playlists():
-#     if not sp_oauth.validate_token(cache_handler.get_cached_token()): # code duplication! abstract this if statement into its own method 
-#         auth_url = sp_oauth.get_authorize_url()
-#         return redirect(auth_url)
-    
-#     playlists = sp.current_user_playlists()
-#     playlists_info = [(pl['name'], pl['external_urls']['spotify']) for pl in playlists['items']]
-#     playlists_html = '<br>'.join([f'{name}: {url}' for name, url in playlists_info])
-
-#     return playlists_html
 
 @app.route('/get_recs')
 def get_recs():
@@ -73,6 +60,7 @@ def get_recs():
     # randomly pick songs
     bella_list = []
 
+    # making playlist 30 songs long
     count = 0
     while count < 30:
         x = random.randint(0, (len(all_songs) - 1))
@@ -80,61 +68,27 @@ def get_recs():
         all_songs.pop(x)
         count += 1
     
+    #creating playlist
     user = sp.current_user()
     user_id = user['id']
-    print(user_id)
+    #print(user_id)
     uri_list = []
     playlist_creator = sp.user_playlist_create(user_id, "Gnome Trip Playlist!", public=True, collaborative=False, description='A playlist for your travels')
     playlist_id = playlist_creator['id']
-    print(playlist_id)
+    #print(playlist_id)
+
+    #adding songs to playlist
     for song in bella_list:
         uri_list.append(song['uri'])
     print(uri_list)
     sp.playlist_add_items(playlist_id, uri_list, position=None)
-    #url = sp.playlist_items(playlist_id, fields='d')
+
+    #getting url for playlist
     url = sp.playlist(playlist_id, fields='external_urls', market=None, additional_types=('track',))
-    #url = url['spotify']
-    #playlist_url = playlist['external_urls']
-    #playlist_url = playlist_url['spotify']
-    #playlist_desc = playlist['description']
+    url = url['external_urls']['spotify']
     print(url)
-    #url_html = {url}
+    return url
     
-    #return url_html
-    return "hi"
-    
-
-    # song_names = [(a['name']) for a in bella_list]
-    # print(song_names)
-    # songs_html  = [f'{name}' for name in song_names]
-
-    # return songs_html
-
-    # song_details = [
-    #     f"{song['name']} - {', '.join(artist['name'] for artist in song['artists'])}"
-    #     for song in bella_list
-    # ]
-
-    # print(song_details)
-
-    # user = sp.current_user()
-    # user_id = user['id']
-    # print(user_id)
-    # uri_list = []
-    # sp.user_playlist_create(user_id, "Gnome Trip Playlist!", public=True, collaborative=False, description='A playlist for your travels')
-    # for song in bella_list:
-    #     uri_list.append(str(song['uri']))
-    # for item in uri_list:
-    #     item.replace("spotify:track:", "")
-    # print(uri_list)
-    # playlist = sp.playlist_add_items(user_id, uri_list, position=None)
-    # playlist_url = playlist['spotify']
-    # print(playlist_url)
-
-    # songs_html = [f'{detail}' for detail in song_details]
-
-    # return songs_html
-
 
 
 
