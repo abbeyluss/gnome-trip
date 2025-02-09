@@ -11,7 +11,7 @@ const Setup = () => {
     //state variables for individual steps of generation process
     const [startText, setStartText] = useState('');
     const [destText, setDestText] = useState('');
-    const [vibesText, setVibesText] = useState('Melancholy');
+    const [vibesText, setVibesText] = useState('Mellow');
     const [playlistDur, setPlaylistDur] = useState(1);
 
     //move forward when the next button is selected

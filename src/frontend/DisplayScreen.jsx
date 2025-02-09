@@ -4,9 +4,9 @@ import "./Styling/Display.css"
  import mellowImg from "./images/mellow.png";
  import dancePartyImg from "./images/danceparty.png";
  import cozyImg from "./images/cozy.png";
-// import mellowbg from "./images/mellowbg.png";
-// import dancePartybg from "./images/dancepartybg.png";
-// import cozybg from "./images/cozybg.png";
+ import mellowbg from "./images/mellowbg.png";
+ import dancePartybg from "./images/dancepartybg.png";
+ import cozybg from "./images/cozybg.png";
 
 const VibeImage = ({ vibesText }) => {
   const vibeGnome = {
@@ -14,14 +14,21 @@ const VibeImage = ({ vibesText }) => {
     DanceParty: dancePartyImg,
     Cozy: cozyImg,
   };
-//   const vibeBackground = {
-//     Melancholy: melancholybg,
-//     DanceParty: dancePartybg,
-//     Cozy: cozybg,
-//   };
+   const vibeBackground = {
+     Mellow: mellowbg,
+     DanceParty: dancePartybg,
+     Cozy: cozybg,
+   };
 
   return (
-    <div className="background-image">
+    <div
+    className="background-image"
+    style={{
+      backgroundImage: `url(${vibeBackground[vibesText] || mellowbg})`, // Default to mellowbg if undefined
+      backgroundSize: "cover",
+      height: "100vh", // Ensures full page background
+    }}
+  >
          <img src="/gnometrip.png" width={250} height={300} alt="Logo"/>
         <div className='gnome'>
       <img src={vibeGnome[vibesText]} alt={vibesText} width="500" height="500" />
