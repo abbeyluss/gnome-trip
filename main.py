@@ -74,12 +74,12 @@ def get_recs():
         all_songs.extend(songs['items'])
 
     # randomly pick songs
-    playlist = []
+    bella_list = []
 
     count = 0
     while count <= 30:
         x = random.randint(0, (len(all_songs) - 1))
-        playlist.append(all_songs[x])
+        bella_list.append(all_songs[x])
         all_songs.pop(x)
         count += 1
     
@@ -92,10 +92,25 @@ def get_recs():
 
     song_details = [
         f"{song['name']} - {', '.join(artist['name'] for artist in song['artists'])}"
-        for song in playlist
-]
+        for song in bella_list
+    ]
 
     print(song_details)
+
+    user = sp.current_user()
+    user_id = user['id']
+    print(user_id)
+    uri_list = []
+    sp.user_playlist_create(user_id, "Gnome Trip Playlist!", public=True, collaborative=False, description='A playlist for your travels')
+    for song in bella_list:
+        uri_list.append(str(song['uri']))
+    for item in uri_list:
+        item.replace("spotify:track:", "")
+    print(uri_list)
+    playlist = sp.playlist_add_items(user_id, uri_list, position=None)
+    playlist_url = playlist['spotify']
+    print(playlist_url)
+
 
 # If you need the details formatted as HTML or some other string,
 # you can simply assign it or further process it.
