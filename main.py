@@ -77,18 +77,32 @@ def get_recs():
     playlist = []
 
     count = 0
-    while count <= 20:
+    while count <= 30:
         x = random.randint(0, (len(all_songs) - 1))
         playlist.append(all_songs[x])
         all_songs.pop(x)
         count += 1
     
 
-    song_names = [(a['name']) for a in playlist]
-    print(song_names)
-    songs_html  = [f'{name}' for name in song_names]
+    # song_names = [(a['name']) for a in playlist]
+    # print(song_names)
+    # songs_html  = [f'{name}' for name in song_names]
+
+    # return songs_html
+
+    song_details = [
+        f"{song['name']} - {', '.join(artist['name'] for artist in song['artists'])}"
+        for song in playlist
+]
+
+    print(song_details)
+
+# If you need the details formatted as HTML or some other string,
+# you can simply assign it or further process it.
+    songs_html = [f'{detail}' for detail in song_details]
 
     return songs_html
+
 
 
 
@@ -103,5 +117,3 @@ def logout():
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)
-
-# gnomeFunc()
