@@ -71,7 +71,6 @@ def get_recs():
     #creating playlist
     user = sp.current_user()
     user_id = user['id']
-    #print(user_id)
     uri_list = []
     playlist_creator = sp.user_playlist_create(user_id, "Gnome Trip Playlist!", public=True, collaborative=False, description='A playlist for your travels')
     playlist_id = playlist_creator['id']
@@ -80,7 +79,6 @@ def get_recs():
     #adding songs to playlist
     for song in bella_list:
         uri_list.append(song['uri'])
-    print(uri_list)
     sp.playlist_add_items(playlist_id, uri_list, position=None)
 
     #getting url for playlist
